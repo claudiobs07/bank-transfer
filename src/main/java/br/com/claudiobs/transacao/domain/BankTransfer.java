@@ -12,8 +12,8 @@ import java.time.LocalDate;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "bank_transaction")
-public class BankTransaction {
+@Table(name = "bank_transfer")
+public class BankTransfer {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -28,11 +28,13 @@ public class BankTransaction {
     Long destinationAccount;
 
     @NotNull
+    BigDecimal amount;
+
+    @NotNull
     BigDecimal tax;
 
     @NotNull
-    @Column(name = "transfer_date")
-    LocalDate transferDate;
+    LocalDate date;
 
     @NotNull
     @Column(name = "created_at")
