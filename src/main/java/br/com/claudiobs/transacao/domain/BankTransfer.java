@@ -1,5 +1,9 @@
 package br.com.claudiobs.transacao.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +15,11 @@ import java.time.LocalDate;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "bank_transfer")
+@EqualsAndHashCode(of = "id")
 public class BankTransfer {
 
     @Id
