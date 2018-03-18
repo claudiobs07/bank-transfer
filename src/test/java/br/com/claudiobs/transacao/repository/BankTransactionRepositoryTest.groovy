@@ -11,7 +11,7 @@ class BankTransactionRepositoryTest extends TransacaoApplicationTests {
     @Autowired
     BankTransferRepository repository
     
-    def "should save and get a banck transaction"() {
+    def "should save and get a bank transfer"() {
         given:
             def bankTransaction =  new BankTransfer(
                     sourceAccount: 123456,
@@ -24,6 +24,11 @@ class BankTransactionRepositoryTest extends TransacaoApplicationTests {
             def persisted = repository.save(bankTransaction)
         then:
             persisted
+        when:
+            def found = repository.findById(persisted.id)
+        then:
+            found.isPresent()
+            found.get() == persisted
     }
 
 }
