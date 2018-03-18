@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -24,26 +25,31 @@ public class BankTransfer {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    Long id;
+    private Long id;
 
     @NotNull
     @Column(name = "source_account")
-    Long sourceAccount;
+    private Long sourceAccount;
 
     @NotNull
     @Column(name = "destination_account")
-    Long destinationAccount;
+    private Long destinationAccount;
 
     @NotNull
-    BigDecimal amount;
+    private BigDecimal amount;
 
     @NotNull
-    BigDecimal tax;
+    private BigDecimal tax;
 
     @NotNull
-    LocalDate date;
+    private LocalDate date;
 
     @NotNull
     @Column(name = "created_at")
-    LocalDate createdAt;
+    private LocalDate createdAt;
+
+    @PrePersist
+    private void onCreate() {
+        this.createdAt = LocalDate.now();
+    }
 }
