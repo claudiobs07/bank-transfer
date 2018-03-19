@@ -62,4 +62,21 @@ class BankTransferControllerTest extends Specification {
             result.andExpect(status().isCreated())
     }
     
+    def "should get status Bad Request when destination account is out of pattern"() {
+        given:
+            def bankTransfer =  new BankTransfer(
+                    sourceAccount: "123456",
+                    destinationAccount:  "0654321",
+                    amount: 12.5,
+                    date: LocalDate.now()
+            )
+        when:
+            ResultActions result = mvc.perform(MockMvcRequestBuilders.post(TRANSFER)
+                    .content(objectMapper.writeValueAsString(bankTransfer))
+                    .contentType(APPLICATION_JSON)
+            )
+        then:
+            result.andExpect(status().isBadRequest())
+    }
+    
 }
