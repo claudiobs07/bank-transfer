@@ -27,28 +27,28 @@ public class BankTransfer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    Long id;
 
     @NotNull
     @Pattern(regexp = "[\\d]{6}")
     @Column(name = "source_account")
-    private String sourceAccount;
+    String sourceAccount;
 
     @NotNull
     @Pattern(regexp = "[\\d]{6}")
     @Column(name = "destination_account")
-    private String destinationAccount;
+    String destinationAccount;
 
     @NotNull
-    private BigDecimal amount;
+    BigDecimal amount;
 
-    private BigDecimal tax;
+    BigDecimal tax;
 
     @NotNull
-    private LocalDate date;
+    LocalDate date;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    LocalDate createdAt;
 
     @PrePersist
     private void onCreate() {
