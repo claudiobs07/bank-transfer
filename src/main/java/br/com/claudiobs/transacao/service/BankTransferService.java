@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class BankTransferService {
 
-    TaxCalculatorManager taxCalculatorManager;
+    private TaxCalculatorManager taxCalculatorManager;
 
-    BankTransferRepository bankTransferRepository;
+    private BankTransferRepository bankTransferRepository;
 
     BankTransferService(TaxCalculatorManager taxCalculatorManager, BankTransferRepository bankTransferRepository) {
         this.taxCalculatorManager = taxCalculatorManager;
