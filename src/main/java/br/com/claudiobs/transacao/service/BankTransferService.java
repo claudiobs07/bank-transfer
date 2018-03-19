@@ -1,6 +1,7 @@
 package br.com.claudiobs.transacao.service;
 
 import br.com.claudiobs.transacao.domain.BankTransfer;
+import br.com.claudiobs.transacao.repository.BankTransferRepository;
 import br.com.claudiobs.transacao.service.tax.TaxHandler;
 import br.com.claudiobs.transacao.service.tax.TaxManager;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,16 @@ public class BankTransferService {
 
     TaxManager taxManager;
 
-    BankTransferService(TaxManager taxManager) {
+    BankTransferRepository bankTransferRepository;
+
+    BankTransferService(TaxManager taxManager, BankTransferRepository bankTransferRepository) {
         this.taxManager = taxManager;
+        this.bankTransferRepository = bankTransferRepository;
     }
 
     public BankTransfer create(BankTransfer bankTransfer) {
         applyTax(bankTransfer);
+        return bankTransferRepository.save(bankTransfer);
     }
 
     private void applyTax(BankTransfer bankTransfer) {
