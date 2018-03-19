@@ -12,7 +12,7 @@ public class TaxCalculatorManager {
     private List<TaxCalculator> taxCalculators;
 
 
-    public TaxCalculator getTaxHandler(long daysToBankTransfer) {
+    public TaxCalculator getTaxCalculator(long daysToBankTransfer) {
         return null;
     }
 

@@ -30,7 +30,7 @@ class BankTransferServiceTest extends Specification {
         when:
             service.create(bankTransfer)
         then:
-            1 * taxManagerMock.getTaxHandler(_ as Long) >> taxHandlerMock
+            1 * taxManagerMock.getTaxCalculator(_ as Long) >> taxHandlerMock
             1 * taxHandlerMock.getTax(_ as Long) >> tax
             1 * bankTransferRepositoryMock.save(_ as BankTransfer) >> { BankTransfer transfer ->
                 assert transfer.tax == tax
