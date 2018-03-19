@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 
 import java.time.LocalDate
 
-class BankTransactionRepositoryTest extends TransacaoApplicationTests {
+class BankTransferRepositoryTest extends TransacaoApplicationTests {
     
     @Autowired
     BankTransferRepository repository
