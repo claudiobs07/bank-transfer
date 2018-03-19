@@ -2,6 +2,7 @@ package br.com.claudiobs.transacao.controller
 
 import br.com.claudiobs.transacao.config.SafeDateFormat
 import br.com.claudiobs.transacao.domain.BankTransfer
+import br.com.claudiobs.transacao.service.BankTransferService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.test.web.servlet.MockMvc
@@ -24,6 +25,8 @@ class BankTransferControllerTest extends Specification {
     
     BankTransferController controller
     
+    BankTransferService bankTransferServiceMock
+    
     static ObjectMapper objectMapper
     
     static  {
@@ -35,14 +38,15 @@ class BankTransferControllerTest extends Specification {
     }
     
     def setup() {
-        controller = new BankTransferController()
+        bankTransferServiceMock = Mock(BankTransferService)
+        controller = new BankTransferController(bankTransferServiceMock)
         
         mvc = MockMvcBuilders.standaloneSetup(controller).build()
     }
     
-    def "should"() {
+    def "should get status CREATED and a complete bank transfer"() {
         given:
-            def bankTransaction =  new BankTransfer(
+            def bankTransfer =  new BankTransfer(
                     sourceAccount: 123456,
                     destinationAccount: 654321,
                     amount: 12.5,
@@ -50,10 +54,11 @@ class BankTransferControllerTest extends Specification {
             )
         when:
             ResultActions result = mvc.perform(MockMvcRequestBuilders.post(TRANSFER)
-                    .content(objectMapper.writeValueAsString(bankTransaction))
+                    .content(objectMapper.writeValueAsString(bankTransfer))
                     .contentType(APPLICATION_JSON)
             )
         then:
+            1 * bankTransferServiceMock.create(_ as BankTransfer) >> bankTransfer
             result.andExpect(status().isCreated())
     }
     
