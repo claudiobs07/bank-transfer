@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -33,4 +34,9 @@ public class BankTransferController {
         bankTransferService.create(bankTransfer);
         return null;
     }
+
+    List<BankTransfer> getAll() {
+        bankTransferService.getAll();
+    }
+
 }

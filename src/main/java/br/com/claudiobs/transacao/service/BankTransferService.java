@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class BankTransferService {
@@ -36,5 +37,9 @@ public class BankTransferService {
 
     private long getDaysToBankTransfer(LocalDate transferDate) {
         return ChronoUnit.DAYS.between(LocalDate.now(), transferDate);
+    }
+
+    public List<BankTransfer> getAll() {
+        return null;
     }
 }
