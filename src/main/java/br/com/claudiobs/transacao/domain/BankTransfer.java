@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -21,7 +22,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "bank_transfer")
 @EqualsAndHashCode(of = "id")
-public class BankTransfer {
+public class BankTransfer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -38,13 +39,11 @@ public class BankTransfer {
     @NotNull
     private BigDecimal amount;
 
-    @NotNull
     private BigDecimal tax;
 
     @NotNull
     private LocalDate date;
 
-    @NotNull
     @Column(name = "created_at")
     private LocalDate createdAt;
 
