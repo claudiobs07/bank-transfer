@@ -1,12 +1,12 @@
 package br.com.claudiobs.transacao.repository
 
-import br.com.claudiobs.transacao.TransacaoApplicationTests
+import br.com.claudiobs.transacao.ApplicationTests
 import br.com.claudiobs.transacao.domain.BankTransfer
 import org.springframework.beans.factory.annotation.Autowired
 
 import java.time.LocalDate
 
-class BankTransferRepositoryTest extends TransacaoApplicationTests {
+class BankTransferRepositoryTest extends ApplicationTests {
     
     @Autowired
     BankTransferRepository repository

@@ -1,6 +1,6 @@
 package br.com.claudiobs.transacao;
 
-class TransacaoApplicationTests extends AbstractTests {
+class ApplicationTests extends AbstractTests {
 
 	void contextLoads() {}
 

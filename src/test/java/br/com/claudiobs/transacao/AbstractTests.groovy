@@ -12,7 +12,7 @@ import spock.lang.Specification
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
 @ActiveProfiles('test')
-@ContextConfiguration(loader = SpringBootContextLoader, classes = TransacaoApplication)
+@ContextConfiguration(loader = SpringBootContextLoader, classes = Application)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 abstract class AbstractTests extends Specification{
     
