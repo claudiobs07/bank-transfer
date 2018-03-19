@@ -17,6 +17,7 @@ import static br.com.claudiobs.transacao.controller.Endpoints.TRANSFER
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import static org.springframework.http.MediaType.APPLICATION_JSON
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class BankTransferControllerTest extends Specification {
@@ -77,6 +78,26 @@ class BankTransferControllerTest extends Specification {
             )
         then:
             result.andExpect(status().isBadRequest())
+    }
+    
+    def "should get a list with all bank transfers"() {
+        given:
+            def bankTransfer =  new BankTransfer(
+                    sourceAccount: "123456",
+                    destinationAccount:  "654321",
+                    amount: 12.5,
+                    date: LocalDate.now()
+            )
+        when:
+            ResultActions result = mvc.perform(MockMvcRequestBuilders.get(TRANSFER)
+                    .contentType(APPLICATION_JSON)
+                    .accept(APPLICATION_JSON)
+            )
+        then:
+            1 * bankTransferServiceMock.getAll() >> [bankTransfer]
+            result.andExpect(status().isOk())
+                    .andExpect(jsonPath('$[0]').exists())
+                    .andExpect(jsonPath('$[0].sourceAccount').exists())
     }
     
 }

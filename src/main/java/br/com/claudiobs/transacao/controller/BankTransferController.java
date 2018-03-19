@@ -4,6 +4,7 @@ import br.com.claudiobs.transacao.domain.BankTransfer;
 import br.com.claudiobs.transacao.service.BankTransferService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,9 @@ public class BankTransferController {
         return null;
     }
 
+    @GetMapping
     List<BankTransfer> getAll() {
-        bankTransferService.getAll();
+        return bankTransferService.getAll();
     }
 
 }
