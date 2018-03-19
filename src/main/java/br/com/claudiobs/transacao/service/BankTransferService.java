@@ -40,6 +40,6 @@ public class BankTransferService {
     }
 
     public List<BankTransfer> getAll() {
-        return null;
+        return bankTransferRepository.findAll();
     }
 }
