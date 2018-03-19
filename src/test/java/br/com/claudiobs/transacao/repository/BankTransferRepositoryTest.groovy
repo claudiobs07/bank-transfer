@@ -1,10 +1,8 @@
 package br.com.claudiobs.transacao.repository
 
 import br.com.claudiobs.transacao.ApplicationTests
-import br.com.claudiobs.transacao.domain.BankTransfer
+import br.com.claudiobs.transacao.fixture.BankTransfers
 import org.springframework.beans.factory.annotation.Autowired
-
-import java.time.LocalDate
 
 class BankTransferRepositoryTest extends ApplicationTests {
     
@@ -13,15 +11,9 @@ class BankTransferRepositoryTest extends ApplicationTests {
     
     def "should save and get a bank transfer"() {
         given:
-            def bankTransaction =  new BankTransfer(
-                    sourceAccount: "123456",
-                    destinationAccount: "654321",
-                    amount: 12.5,
-                    tax: 0.3,
-                    date: LocalDate.now()
-            )
+            def bankTransfer = BankTransfers.create(0.3)
         when:
-            def persisted = repository.save(bankTransaction)
+            def persisted = repository.save(bankTransfer)
         then:
             persisted
         when:

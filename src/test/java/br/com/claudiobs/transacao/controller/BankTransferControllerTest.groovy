@@ -2,6 +2,7 @@ package br.com.claudiobs.transacao.controller
 
 import br.com.claudiobs.transacao.config.SafeDateFormat
 import br.com.claudiobs.transacao.domain.BankTransfer
+import br.com.claudiobs.transacao.fixture.BankTransfers
 import br.com.claudiobs.transacao.service.BankTransferService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
@@ -10,8 +11,6 @@ import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
-
-import java.time.LocalDate
 
 import static br.com.claudiobs.transacao.controller.Endpoints.TRANSFER
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL
@@ -47,12 +46,7 @@ class BankTransferControllerTest extends Specification {
     
     def "should get status CREATED and a complete bank transfer"() {
         given:
-            def bankTransfer =  new BankTransfer(
-                    sourceAccount: "123456",
-                    destinationAccount:  "654321",
-                    amount: 12.5,
-                    date: LocalDate.now()
-            )
+            def bankTransfer = BankTransfers.create()
         when:
             ResultActions result = mvc.perform(MockMvcRequestBuilders.post(TRANSFER)
                     .content(objectMapper.writeValueAsString(bankTransfer))
@@ -65,12 +59,10 @@ class BankTransferControllerTest extends Specification {
     
     def "should get status Bad Request when destination account is out of pattern"() {
         given:
-            def bankTransfer =  new BankTransfer(
-                    sourceAccount: "123456",
-                    destinationAccount:  "0654321",
-                    amount: 12.5,
-                    date: LocalDate.now()
-            )
+            def bankTransfer = BankTransfers.create().with {
+                destinationAccount = "0123456"
+                it
+            }
         when:
             ResultActions result = mvc.perform(MockMvcRequestBuilders.post(TRANSFER)
                     .content(objectMapper.writeValueAsString(bankTransfer))
@@ -82,12 +74,7 @@ class BankTransferControllerTest extends Specification {
     
     def "should get a list with all bank transfers"() {
         given:
-            def bankTransfer =  new BankTransfer(
-                    sourceAccount: "123456",
-                    destinationAccount:  "654321",
-                    amount: 12.5,
-                    date: LocalDate.now()
-            )
+            def bankTransfer = BankTransfers.create()
         when:
             ResultActions result = mvc.perform(MockMvcRequestBuilders.get(TRANSFER)
                     .contentType(APPLICATION_JSON)
