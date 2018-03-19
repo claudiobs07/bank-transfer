@@ -47,8 +47,8 @@ class BankTransferControllerTest extends Specification {
     def "should get status CREATED and a complete bank transfer"() {
         given:
             def bankTransfer =  new BankTransfer(
-                    sourceAccount: 123456,
-                    destinationAccount: 654321,
+                    sourceAccount: "123456",
+                    destinationAccount:  "654321",
                     amount: 12.5,
                     date: LocalDate.now()
             )

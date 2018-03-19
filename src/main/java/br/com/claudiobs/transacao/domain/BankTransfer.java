@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,12 +30,14 @@ public class BankTransfer implements Serializable {
     private Long id;
 
     @NotNull
+    @Pattern(regexp = "[\\d]{6}")
     @Column(name = "source_account")
-    private Long sourceAccount;
+    private String sourceAccount;
 
     @NotNull
+    @Pattern(regexp = "[\\d]{6}")
     @Column(name = "destination_account")
-    private Long destinationAccount;
+    private String destinationAccount;
 
     @NotNull
     private BigDecimal amount;

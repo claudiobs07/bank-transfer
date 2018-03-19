@@ -14,8 +14,8 @@ class BankTransferRepositoryTest extends ApplicationTests {
     def "should save and get a bank transfer"() {
         given:
             def bankTransaction =  new BankTransfer(
-                    sourceAccount: 123456,
-                    destinationAccount: 654321,
+                    sourceAccount: "123456",
+                    destinationAccount: "654321",
                     amount: 12.5,
                     tax: 0.3,
                     date: LocalDate.now()
