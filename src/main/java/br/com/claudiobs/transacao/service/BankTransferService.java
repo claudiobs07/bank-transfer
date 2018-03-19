@@ -2,8 +2,8 @@ package br.com.claudiobs.transacao.service;
 
 import br.com.claudiobs.transacao.domain.BankTransfer;
 import br.com.claudiobs.transacao.repository.BankTransferRepository;
-import br.com.claudiobs.transacao.service.tax.TaxHandler;
-import br.com.claudiobs.transacao.service.tax.TaxManager;
+import br.com.claudiobs.transacao.service.tax.TaxCalculator;
+import br.com.claudiobs.transacao.service.tax.TaxCalculatorManager;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,12 +13,12 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class BankTransferService {
 
-    TaxManager taxManager;
+    TaxCalculatorManager taxCalculatorManager;
 
     BankTransferRepository bankTransferRepository;
 
-    BankTransferService(TaxManager taxManager, BankTransferRepository bankTransferRepository) {
-        this.taxManager = taxManager;
+    BankTransferService(TaxCalculatorManager taxCalculatorManager, BankTransferRepository bankTransferRepository) {
+        this.taxCalculatorManager = taxCalculatorManager;
         this.bankTransferRepository = bankTransferRepository;
     }
 
@@ -29,8 +29,8 @@ public class BankTransferService {
 
     private void applyTax(BankTransfer bankTransfer) {
         long daysToBankTransfer = getDaysToBankTransfer(bankTransfer.getDate());
-        TaxHandler taxHandler = taxManager.getTaxHandler(daysToBankTransfer);
-        BigDecimal tax = taxHandler.getTax(daysToBankTransfer);
+        TaxCalculator taxCalculator = taxCalculatorManager.getTaxHandler(daysToBankTransfer);
+        BigDecimal tax = taxCalculator.getTax(daysToBankTransfer);
         bankTransfer.setTax(tax);
     }
 

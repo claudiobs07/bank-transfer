@@ -2,7 +2,7 @@ package br.com.claudiobs.transacao.service.tax;
 
 import java.math.BigDecimal;
 
-public interface TaxHandler {
+public interface TaxCalculator {
 
     BigDecimal getTax(long daysToBankTransfer);
 

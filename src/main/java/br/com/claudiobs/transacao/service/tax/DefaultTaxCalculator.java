@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class DefaultTaxHandler implements TaxHandler {
+public class DefaultTaxCalculator implements TaxCalculator {
     @Override
     public BigDecimal getTax(long daysToBankTransfer) {
         return null;

@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class TaxManager {
+public class TaxCalculatorManager {
 
     @Autowired
-    private List<TaxHandler> taxHandlers;
+    private List<TaxCalculator> taxCalculators;
 
 
-    public TaxHandler getTaxHandler(long daysToBankTransfer) {
+    public TaxCalculator getTaxHandler(long daysToBankTransfer) {
         return null;
     }
 
