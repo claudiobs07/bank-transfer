@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TaxCalculatorManager {
@@ -13,7 +14,11 @@ public class TaxCalculatorManager {
 
 
     public TaxCalculator getTaxCalculator(long daysToBankTransfer) {
-        return null;
+        Optional<TaxCalculator> optionalTaxCalculator = taxCalculators
+                .stream()
+                .filter(taxCalculator -> taxCalculator.isValid(daysToBankTransfer))
+                .findFirst();
+        return optionalTaxCalculator.get();
     }
 
 }

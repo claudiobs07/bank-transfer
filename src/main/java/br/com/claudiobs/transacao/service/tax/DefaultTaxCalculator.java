@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 public class DefaultTaxCalculator implements TaxCalculator {
     @Override
     public BigDecimal getTax(long daysToBankTransfer) {
-        return null;
+        return new BigDecimal(12.0);
     }
 
     @Override
     public boolean isValid(long daysToBankTransfer) {
-        return false;
+        return true;
     }
 }
