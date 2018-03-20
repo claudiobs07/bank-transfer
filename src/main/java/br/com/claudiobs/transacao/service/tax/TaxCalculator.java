@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public interface TaxCalculator {
 
-    BigDecimal getTax(long daysToBankTransfer);
+    BigDecimal getTax(long daysToBankTransfer, BigDecimal amount);
 
-    boolean isValid(long daysToBankTransfer);
+    boolean isValid(long daysToBankTransfer, BigDecimal amount);
 
 }

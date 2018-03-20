@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 @Component
 public class DefaultTaxCalculator implements TaxCalculator {
     @Override
-    public BigDecimal getTax(long daysToBankTransfer) {
+    public BigDecimal getTax(long daysToBankTransfer, BigDecimal amount) {
         return new BigDecimal(12.0);
     }
 
     @Override
-    public boolean isValid(long daysToBankTransfer) {
+    public boolean isValid(long daysToBankTransfer, BigDecimal amount) {
         return true;
     }
 }

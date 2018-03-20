@@ -25,7 +25,7 @@ class BankTransferControllerIT extends AbstractTests {
         mvc = MockMvcBuilders.webAppContextSetup(context).build()
     }
     
-    def "should"() {
+    def "should check created bank transfer response"() {
         given:
             def bankTransfer = BankTransfers.create()
         when:
