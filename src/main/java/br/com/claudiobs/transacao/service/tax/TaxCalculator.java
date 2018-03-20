@@ -8,4 +8,8 @@ public interface TaxCalculator {
 
     boolean isValid(long daysToBankTransfer, BigDecimal amount);
 
+    default BigDecimal percentage(Integer percent, BigDecimal amount) {
+        return amount;
+    }
+
 }
