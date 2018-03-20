@@ -30,8 +30,8 @@ public class BankTransferService {
 
     private void applyTax(BankTransfer bankTransfer) {
         long daysToBankTransfer = getDaysToBankTransfer(bankTransfer.getDate());
-        TaxCalculator taxCalculator = taxCalculatorManager.getTaxCalculator(daysToBankTransfer);
-        BigDecimal tax = taxCalculator.getTax(daysToBankTransfer);
+        TaxCalculator taxCalculator = taxCalculatorManager.getTaxCalculator(daysToBankTransfer, bankTransfer.getAmount());
+        BigDecimal tax = taxCalculator.getTax(daysToBankTransfer, bankTransfer.getAmount());
         bankTransfer.setTax(tax);
     }
 
