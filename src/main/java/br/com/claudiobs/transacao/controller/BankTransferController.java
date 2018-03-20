@@ -32,8 +32,7 @@ public class BankTransferController {
     @PostMapping
     BankTransfer create(@Valid @RequestBody BankTransfer bankTransfer) {
         log.info("creating bankTransfer=" + bankTransfer);
-        bankTransferService.create(bankTransfer);
-        return null;
+        return bankTransferService.create(bankTransfer);
     }
 
     @GetMapping
