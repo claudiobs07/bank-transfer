@@ -14,12 +14,11 @@ public class TaxCalculatorManager {
     private List<TaxCalculator> taxCalculators;
 
 
-    public TaxCalculator getTaxCalculator(long daysToBankTransfer, BigDecimal amount) {
-        Optional<TaxCalculator> optionalTaxCalculator = taxCalculators
+    public Optional<TaxCalculator> getTaxCalculator(long daysToBankTransfer, BigDecimal amount) {
+        return taxCalculators
                 .stream()
                 .filter(taxCalculator -> taxCalculator.isValid(daysToBankTransfer, amount))
                 .findFirst();
-        return optionalTaxCalculator.get();
     }
 
 }

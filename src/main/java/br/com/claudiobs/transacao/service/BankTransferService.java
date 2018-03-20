@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BankTransferService {
@@ -29,10 +30,15 @@ public class BankTransferService {
     }
 
     private void applyTax(BankTransfer bankTransfer) {
-        long daysToBankTransfer = getDaysToBankTransfer(bankTransfer.getDate());
-        TaxCalculator taxCalculator = taxCalculatorManager.getTaxCalculator(daysToBankTransfer, bankTransfer.getAmount());
-        BigDecimal tax = taxCalculator.getTax(daysToBankTransfer, bankTransfer.getAmount());
+        BigDecimal tax = calculateTax(bankTransfer);
         bankTransfer.setTax(tax);
+    }
+
+    private BigDecimal calculateTax(BankTransfer bankTransfer) {
+        long daysToBankTransfer = getDaysToBankTransfer(bankTransfer.getDate());
+        Optional<TaxCalculator> optTaxCalculator = taxCalculatorManager.getTaxCalculator(daysToBankTransfer, bankTransfer.getAmount());
+        TaxCalculator taxCalculator = optTaxCalculator.orElseThrow(RuntimeException::new);
+        return taxCalculator.getTax(daysToBankTransfer, bankTransfer.getAmount());
     }
 
     private long getDaysToBankTransfer(LocalDate transferDate) {
