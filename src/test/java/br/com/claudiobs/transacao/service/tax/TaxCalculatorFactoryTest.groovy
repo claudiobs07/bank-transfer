@@ -2,29 +2,29 @@ package br.com.claudiobs.transacao.service.tax
 
 import spock.lang.Specification
 
-class TaxCalculatorManagerTest extends Specification {
+class TaxCalculatorFactoryTest extends Specification {
     
     TaxCalculatorFactory manager
     
-    DefaultTaxCalculator defaultTaxCalculatorMock
+    DayTaxCalculator taxCalculatorMock
     
     def setup() {
-        defaultTaxCalculatorMock = Mock(DefaultTaxCalculator)
+        taxCalculatorMock = Mock(DayTaxCalculator)
         
-        manager = new TaxCalculatorFactory(taxCalculators: [defaultTaxCalculatorMock])
+        manager = new TaxCalculatorFactory(taxCalculators: [taxCalculatorMock])
     }
     
     
     def "should get default tax calculator"() {
         given:
-            def daysToBankTransfer = 1l
+            def daysToBankTransfer = 0l
             def amount = new BigDecimal(20.0)
         when:
             def taxCalculator = manager.getTaxCalculator(daysToBankTransfer, amount)
         then:
-            defaultTaxCalculatorMock.isValid(_ as long, _ as BigDecimal) >> true
+            taxCalculatorMock.isValid(_ as long, _ as BigDecimal) >> true
             taxCalculator.isPresent()
-            taxCalculator instanceof DefaultTaxCalculator
+            taxCalculator instanceof DayTaxCalculator
     }
     
     def "should get optional empty when none match"() {
@@ -34,7 +34,7 @@ class TaxCalculatorManagerTest extends Specification {
         when:
             def taxCalculator = manager.getTaxCalculator(daysToBankTransfer, amount)
         then:
-            defaultTaxCalculatorMock.isValid(_ as long, _ as BigDecimal) >> false
+            taxCalculatorMock.isValid(_ as long, _ as BigDecimal) >> false
             !taxCalculator.isPresent()
     }
 }

@@ -1,7 +1,10 @@
 package br.com.claudiobs.transacao.service.tax;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class DayTaxCalculator implements TaxCalculator {
 
     @Override

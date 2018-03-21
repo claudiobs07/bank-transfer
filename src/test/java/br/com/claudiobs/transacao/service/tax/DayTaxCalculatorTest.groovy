@@ -20,6 +20,7 @@ class DayTaxCalculatorTest extends Specification {
             20l                 | 123.00    | false
     }
     
+    @Unroll
     def "should"() {
         when:
             def tax = taxCalculator.getTax(0l, new BigDecimal(amount))

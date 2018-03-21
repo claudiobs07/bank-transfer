@@ -1,7 +1,10 @@
 package br.com.claudiobs.transacao.service.tax;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class AboveFourTenTaxCalculator implements TaxCalculator {
 
     @Override
@@ -11,6 +14,6 @@ public class AboveFourTenTaxCalculator implements TaxCalculator {
 
     @Override
     public boolean isValid(long daysToBankTransfer, BigDecimal amount) {
-        return daysToBankTransfer > 40 && amount.compareTo(new BigDecimal(100000)) > 0;
+        return daysToBankTransfer > 40 && amount.compareTo(new BigDecimal(100000)) >= 0;
     }
 }
