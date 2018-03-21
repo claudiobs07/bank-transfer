@@ -17,9 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BankTransferControllerIT extends AbstractTests {
     
     @Autowired
-    BankTransferController bankTransferController
-    
-    @Autowired
     ObjectMapper objectMapper
     
     def setup() {
