@@ -2,15 +2,15 @@ package br.com.claudiobs.transacao.service.tax;
 
 import java.math.BigDecimal;
 
-public class DayTaxCalculator implements TaxCalculator {
+public class AboveFourTenTaxCalculator implements TaxCalculator {
 
     @Override
     public BigDecimal getTax(long daysToBankTransfer, BigDecimal amount) {
-        return new BigDecimal(3).add(percentage(new BigDecimal(3), amount));
+        return percentage(new BigDecimal(2), amount);
     }
 
     @Override
     public boolean isValid(long daysToBankTransfer, BigDecimal amount) {
-        return daysToBankTransfer == 0;
+        return daysToBankTransfer > 40 && amount.compareTo(new BigDecimal(100000)) > 0;
     }
 }
