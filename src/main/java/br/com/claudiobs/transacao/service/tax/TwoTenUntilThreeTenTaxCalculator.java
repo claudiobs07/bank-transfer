@@ -12,7 +12,7 @@ public class TwoTenUntilThreeTenTaxCalculator implements TaxCalculator {
 
     @Override
     public boolean isValid(long daysToBankTransfer, BigDecimal amount) {
-        return daysToBankTransfer > 10 && daysToBankTransfer >= 40;
+        return daysToBankTransfer > 10 && daysToBankTransfer <= 40;
     }
 
     private BigDecimal calculatePercent(long daysToBankTransfer) {

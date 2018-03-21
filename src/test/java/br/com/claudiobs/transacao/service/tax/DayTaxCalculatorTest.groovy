@@ -1,12 +1,14 @@
 package br.com.claudiobs.transacao.service.tax
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class DayTaxCalculatorTest extends Specification {
     
     DayTaxCalculator taxCalculator = new DayTaxCalculator()
     
-    def "should check tax calculator valid"() {
+    @Unroll
+    def "check tax calculator valid when dayToBankTransfer=#dayToBankTransfer then expect=#expected"() {
         when:
             def valid = taxCalculator.isValid(dayToBankTransfer, new BigDecimal(amount))
         then:
