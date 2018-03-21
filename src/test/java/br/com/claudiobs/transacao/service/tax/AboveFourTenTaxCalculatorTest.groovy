@@ -1,6 +1,5 @@
 package br.com.claudiobs.transacao.service.tax
 
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -23,18 +22,18 @@ class AboveFourTenTaxCalculatorTest extends Specification {
             50l                 | 123000.00  | true
     }
     
-    @Ignore
     @Unroll
-    def "should"() {
+    def "given a amount=#amount should get tax=#expected"() {
         when:
-            def tax = taxCalculator.getTax(0l, new BigDecimal(amount))
+            def tax = taxCalculator.getTax(45, new BigDecimal(amount))
         then:
             tax == expected
         where:
             amount    | expected
-            100.00    | 106.0
-            200.00    | 212.0
-            1.00      | 4.06
+            100       | 2.0
+            200       | 4.0
+            400       | 8.0
+            1000      | 20.0
     }
     
 }
