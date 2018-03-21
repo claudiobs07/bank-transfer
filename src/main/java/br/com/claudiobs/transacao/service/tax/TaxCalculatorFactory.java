@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TaxCalculatorManager {
+public class TaxCalculatorFactory {
 
     @Autowired
     private List<TaxCalculator> taxCalculators;

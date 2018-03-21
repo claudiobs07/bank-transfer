@@ -4,14 +4,14 @@ import spock.lang.Specification
 
 class TaxCalculatorManagerTest extends Specification {
     
-    TaxCalculatorManager manager
+    TaxCalculatorFactory manager
     
     DefaultTaxCalculator defaultTaxCalculatorMock
     
     def setup() {
         defaultTaxCalculatorMock = Mock(DefaultTaxCalculator)
         
-        manager = new TaxCalculatorManager(taxCalculators: [defaultTaxCalculatorMock])
+        manager = new TaxCalculatorFactory(taxCalculators: [defaultTaxCalculatorMock])
     }
     
     

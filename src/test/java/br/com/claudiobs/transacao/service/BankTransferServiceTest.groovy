@@ -4,22 +4,22 @@ import br.com.claudiobs.transacao.domain.BankTransfer
 import br.com.claudiobs.transacao.fixture.BankTransfers
 import br.com.claudiobs.transacao.repository.BankTransferRepository
 import br.com.claudiobs.transacao.service.tax.TaxCalculator
-import br.com.claudiobs.transacao.service.tax.TaxCalculatorManager
+import br.com.claudiobs.transacao.service.tax.TaxCalculatorFactory
 import spock.lang.Specification
 
 class BankTransferServiceTest extends Specification {
     
     BankTransferRepository bankTransferRepositoryMock
     
-    TaxCalculatorManager taxManagerMock
+    TaxCalculatorFactory taxCalculatorFactoryMock
     
     BankTransferService service
     
     def setup() {
         bankTransferRepositoryMock = Mock(BankTransferRepository)
-        taxManagerMock = Mock(TaxCalculatorManager)
+        taxCalculatorFactoryMock = Mock(TaxCalculatorFactory)
         
-        service = new BankTransferService(taxManagerMock, bankTransferRepositoryMock)
+        service = new BankTransferService(taxCalculatorFactoryMock, bankTransferRepositoryMock)
     }
     
     def "should apply tax and save bank transfer"() {
@@ -30,7 +30,7 @@ class BankTransferServiceTest extends Specification {
         when:
             service.create(bankTransfer)
         then:
-            1 * taxManagerMock.getTaxCalculator(_ as Long) >> taxHandlerMock
+            1 * taxCalculatorFactoryMock.getTaxCalculator(_ as Long) >> taxHandlerMock
             1 * taxHandlerMock.getTax(_ as Long) >> tax
             1 * bankTransferRepositoryMock.save(_ as BankTransfer) >> { BankTransfer transfer ->
                 assert transfer.tax == tax

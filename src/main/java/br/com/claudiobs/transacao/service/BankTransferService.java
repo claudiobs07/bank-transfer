@@ -3,7 +3,7 @@ package br.com.claudiobs.transacao.service;
 import br.com.claudiobs.transacao.domain.BankTransfer;
 import br.com.claudiobs.transacao.repository.BankTransferRepository;
 import br.com.claudiobs.transacao.service.tax.TaxCalculator;
-import br.com.claudiobs.transacao.service.tax.TaxCalculatorManager;
+import br.com.claudiobs.transacao.service.tax.TaxCalculatorFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,12 +15,12 @@ import java.util.Optional;
 @Service
 public class BankTransferService {
 
-    private TaxCalculatorManager taxCalculatorManager;
+    private TaxCalculatorFactory taxCalculatorFactory;
 
     private BankTransferRepository bankTransferRepository;
 
-    BankTransferService(TaxCalculatorManager taxCalculatorManager, BankTransferRepository bankTransferRepository) {
-        this.taxCalculatorManager = taxCalculatorManager;
+    BankTransferService(TaxCalculatorFactory taxCalculatorFactory, BankTransferRepository bankTransferRepository) {
+        this.taxCalculatorFactory = taxCalculatorFactory;
         this.bankTransferRepository = bankTransferRepository;
     }
 
@@ -36,7 +36,7 @@ public class BankTransferService {
 
     private BigDecimal calculateTax(BankTransfer bankTransfer) {
         long daysToBankTransfer = getDaysToBankTransfer(bankTransfer.getDate());
-        Optional<TaxCalculator> optTaxCalculator = taxCalculatorManager.getTaxCalculator(daysToBankTransfer, bankTransfer.getAmount());
+        Optional<TaxCalculator> optTaxCalculator = taxCalculatorFactory.getTaxCalculator(daysToBankTransfer, bankTransfer.getAmount());
         TaxCalculator taxCalculator = optTaxCalculator.orElseThrow(RuntimeException::new);
         return taxCalculator.getTax(daysToBankTransfer, bankTransfer.getAmount());
     }
