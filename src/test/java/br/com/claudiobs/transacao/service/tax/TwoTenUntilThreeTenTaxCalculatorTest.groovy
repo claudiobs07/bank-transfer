@@ -18,7 +18,7 @@ class TwoTenUntilThreeTenTaxCalculatorTest extends Specification {
             10l                 | 123.00    | false
             11l                 | 123.00    | true
             20l                 | 123.00    | true
-            20l                 | 123.00    | true
+            30l                 | 123.00    | true
             40l                 | 123.00    | true
             41l                 | 123.00    | false
     }
