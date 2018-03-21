@@ -9,7 +9,7 @@ public class FirstTenTaxCalculator implements TaxCalculator {
 
     @Override
     public BigDecimal getTax(long daysToBankTransfer, BigDecimal amount) {
-        return amount.multiply(new BigDecimal(daysToBankTransfer));
+        return new BigDecimal(12).multiply(new BigDecimal(daysToBankTransfer));
     }
 
     @Override

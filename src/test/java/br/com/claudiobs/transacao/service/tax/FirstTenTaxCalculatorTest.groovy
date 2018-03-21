@@ -16,7 +16,24 @@ class FirstTenTaxCalculatorTest extends Specification {
         where:
             dayToBankTransfer   | expected
             0l                  | false
-            1l                  | false
-            10l                 | false
+            1l                  | true
+            10l                 | true
+    }
+    
+    @Unroll
+    def "given a dayToBankTransfer=#dayToBankTransfer should get tax=#tax"() {
+        when:
+            def tax = taxCalculator.getTax(dayToBankTransfer, new BigDecimal(100))
+        then:
+            tax == expected
+        where:
+            dayToBankTransfer   | expected
+            1l                  | 12.0
+            2l                  | 24.0
+            4l                  | 48.0
+            6l                  | 72.0
+            8l                  | 96.0
+            9l                  | 108.0
+            10l                 | 120.0
     }
 }
