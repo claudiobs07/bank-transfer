@@ -3,9 +3,9 @@ package br.com.claudiobs.transacao.service.tax
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class TwoTenUntilThreeTenTaxCalculatorTest extends Specification {
+class TwoTenUntilFourTenTaxCalculatorTest extends Specification {
     
-    TwoTenUntilThreeTenTaxCalculator taxCalculator = new TwoTenUntilThreeTenTaxCalculator()
+    TwoTenUntilFourTenTaxCalculator taxCalculator = new TwoTenUntilFourTenTaxCalculator()
     
     @Unroll
     def "check tax calculator valid when dayToBankTransfer=#dayToBankTransfer then expect=#expected"() {
