@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import static br.com.claudiobs.transacao.controller.Endpoints.TRANSFER
 import static org.springframework.http.MediaType.APPLICATION_JSON
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -29,16 +30,27 @@ class BankTransferControllerIT extends AbstractTests {
         given:
             def bankTransfer = BankTransfers.create()
         when:
-            ResultActions result = mvc.perform(post(TRANSFER)
+            ResultActions postResult = mvc.perform(post(TRANSFER)
                     .content(objectMapper.writeValueAsString(bankTransfer))
                     .contentType(APPLICATION_JSON)
             )
         then:
-            result.andExpect(status().isCreated())
-            String content = result.andReturn().response.contentAsString
-            def persisted = objectMapper.readValue(content, BankTransfer)
-            persisted.id
-            persisted.sourceAccount == bankTransfer.sourceAccount
+            postResult.andExpect(status().isCreated())
+            String postContent = postResult.andReturn().response.contentAsString
+            def created = objectMapper.readValue(postContent, BankTransfer)
+            created.id
+            created.sourceAccount == bankTransfer.sourceAccount
+            created.destinationAccount == bankTransfer.destinationAccount
+        when:
+            ResultActions getResult = mvc.perform(get(TRANSFER)
+                    .accept(APPLICATION_JSON)
+            )
+        then:
+            getResult.andExpect(status().isOk())
+            String getContent = getResult.andReturn().response.contentAsString
+            def founds = objectMapper.readValue(getContent, BankTransfer[])
+            founds.size() == 1
+            founds.head().id == created.id
     }
 
 }

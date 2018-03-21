@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(Endpoints.TRANSFER)
@@ -35,6 +36,7 @@ public class BankTransferController {
         return bankTransferService.create(bankTransfer);
     }
 
+    @ResponseStatus(OK)
     @GetMapping
     List<BankTransfer> getAll() {
         return bankTransferService.getAll();
