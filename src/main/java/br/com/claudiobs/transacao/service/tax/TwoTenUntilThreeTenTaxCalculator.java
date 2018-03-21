@@ -10,7 +10,7 @@ public class TwoTenUntilThreeTenTaxCalculator implements TaxCalculator {
     @Override
     public BigDecimal getTax(long daysToBankTransfer, BigDecimal amount) {
         BigDecimal percent = calculatePercent(daysToBankTransfer);
-        return percentage(amount, percent);
+        return percentage(percent, amount);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class TwoTenUntilThreeTenTaxCalculator implements TaxCalculator {
     }
 
     private BigDecimal calculatePercent(long daysToBankTransfer) {
-        double x = Math.ceil(daysToBankTransfer / 10);
-        return new BigDecimal((x * 2) - 12);
+        double x = Math.ceil(daysToBankTransfer / 10.0);
+        return new BigDecimal(((x * 2) - 12) * - 1);
     }
 }

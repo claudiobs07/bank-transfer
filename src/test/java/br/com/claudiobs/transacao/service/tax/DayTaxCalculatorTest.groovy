@@ -21,7 +21,7 @@ class DayTaxCalculatorTest extends Specification {
     }
     
     @Unroll
-    def "given a amount=#amount should get tax=#tax"() {
+    def "given a amount=#amount should get tax=#expected"() {
         when:
             def tax = taxCalculator.getTax(0l, new BigDecimal(amount))
         then:

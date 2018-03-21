@@ -10,17 +10,33 @@ class TwoTenUntilThreeTenTaxCalculatorTest extends Specification {
     @Unroll
     def "check tax calculator valid when dayToBankTransfer=#dayToBankTransfer then expect=#expected"() {
         when:
-            def valid = taxCalculator.isValid(dayToBankTransfer, new BigDecimal(amount))
+            def valid = taxCalculator.isValid(dayToBankTransfer, new BigDecimal(100))
         then:
             valid == expected
         where:
-            dayToBankTransfer   | amount    | expected
-            10l                 | 123.00    | false
-            11l                 | 123.00    | true
-            20l                 | 123.00    | true
-            30l                 | 123.00    | true
-            40l                 | 123.00    | true
-            41l                 | 123.00    | false
+            dayToBankTransfer   | expected
+            10l                 | false
+            11l                 | true
+            20l                 | true
+            30l                 | true
+            40l                 | true
+            41l                 | false
+    }
+    
+    @Unroll
+    def "given a daysToBankTransfer=#daysToBankTransfer should get tax=#expected"() {
+        when:
+            def tax = taxCalculator.getTax(daysToBankTransfer, new BigDecimal(100))
+        then:
+            tax == expected
+        where:
+            daysToBankTransfer  | expected
+            11                  | 8.0
+            20                  | 8.0
+            21                  | 6.0
+            30                  | 6.0
+            31                  | 4.0
+            40                  | 4.0
     }
     
     

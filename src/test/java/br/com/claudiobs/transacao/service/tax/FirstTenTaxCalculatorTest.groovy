@@ -21,7 +21,7 @@ class FirstTenTaxCalculatorTest extends Specification {
     }
     
     @Unroll
-    def "given a dayToBankTransfer=#dayToBankTransfer should get tax=#tax"() {
+    def "given a dayToBankTransfer=#dayToBankTransfer should get tax=#expected"() {
         when:
             def tax = taxCalculator.getTax(dayToBankTransfer, new BigDecimal(100))
         then:
