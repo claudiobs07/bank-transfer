@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.claudiobs</groupId>
-	<artifactId>transacao</artifactId>
+	<artifactId>bank-transfer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>transacao</name>
-	<description>Demo project for Spring Boot</description>
+	<name>bank-transfer</name>
+	<description>Simple example of Bank Transfer</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
